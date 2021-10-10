@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodoController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,6 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(["middleware" => "auth:sanctum"], function () {
     Route::resource('todos', '\App\Http\Controllers\TodoController')->except(['edit', 'create']);
+    Route::post("todos",[TodoController::class,"store"]);
+    Route::put("/todos/{todo}",[TodoController::class,"update"]);
+    Route::delete("/todos/{todo}",[TodoController::class,"delete"]);
 });
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostTodoRequest extends FormRequest
+class UpdateTodoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PostTodoRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,18 +24,16 @@ class PostTodoRequest extends FormRequest
     public function rules()
     {
         return [
-            "title" => "string",
+            "title" => "required|String",
             "description" => "string",
-            "complete"=>"boolean"
             //
         ];
     }
     public function messages()
     {
         return [
-            'title.string' => 'A title must be string',
+            'title.required' => 'A title is required',
             'description.string' => 'desccription must be string',
-            'complete.boolean' => 'complete must be bollean',
         ];
     }
 }
