@@ -78,6 +78,7 @@ class TodoController extends Controller
         $data =   $request->only(['title', 'description','complete']);
        
         try {
+            // if (Auth::id() == $todo->user_id) 
             if($todo->update($data))
             {
                 return $this->success("todo updated succefully",[]);
@@ -101,6 +102,7 @@ class TodoController extends Controller
     public function destroy(Todo $todo)
     {
         try {
+             // if (Auth::id() == $todo->user_id) 
             if ($todo->delete()) {
                 return $this->success("todo deleted succefully",[]);
             }
