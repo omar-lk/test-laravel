@@ -21,8 +21,15 @@ class TodoController extends Controller
      */
     public function index()
     {
+        try{
         $user = Auth::user();
         return $this->success("todos",$user->todos()->paginate(15)) ;
+        }
+        catch (\Exception $e) {
+            //throw $th;
+            return $this->failure($e->getMessage());
+        }
+        
         // return Todo::where('user_id',$user->id)->get();
     }
 
@@ -75,6 +82,10 @@ class TodoController extends Controller
             {
                 return $this->success("todo updated succefully",[]);
             }
+            else
+            {
+            $this->failure("not updated");
+            }
         } catch (\Exception $e) {
             //throw $th;
             return $this->failure($e->getMessage());
@@ -92,6 +103,10 @@ class TodoController extends Controller
         try {
             if ($todo->delete()) {
                 return $this->success("todo deleted succefully",[]);
+            }
+             else
+            {
+            $this->failure("not deleted");
             }
         } catch (\Exception $e) {
            
