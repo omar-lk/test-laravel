@@ -68,8 +68,8 @@ class TodoController extends Controller
      */
     public function update(UpdateTodoRequest $request,Todo $todo)
     {
-        $data = $request->all();
-        unset($data['user_id']);
+        $data =   $request->only(['title', 'description','complete']);
+       
         try {
             if($todo->update($data))
             {
