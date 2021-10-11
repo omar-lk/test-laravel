@@ -113,4 +113,19 @@ class TodoController extends Controller
             return $this->failure($e->getMessage());
         }
     }
+     public function destroyById($todo_id)
+    {
+        try {
+            if (Todo::where('id',$todo_id)->delete()) {
+                return $this->success("todo deleted succefully",[]);
+            }
+             else
+            {
+            $this->failure("not deleted");
+            }
+        } catch (\Exception $e) {
+           
+            return $this->failure($e->getMessage());
+        }
+    }
 }
